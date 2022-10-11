@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "919784751731",
+    "project_id": "photosharingproject-8bdd7",
+    "storage_bucket": "photosharingproject-8bdd7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:919784751731:android:ea14636456113259092006",
+        "android_client_info": {
+          "package_name": "com.volkankelleci.photosharingproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "919784751731-p0lni4cad3ni0nguc9s4k4mda7h3u9dh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5VP-eFtj96XJPUU8Vh9fPyEWAFWzj-Oc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "919784751731-p0lni4cad3ni0nguc9s4k4mda7h3u9dh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
