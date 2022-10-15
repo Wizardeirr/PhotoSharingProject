@@ -28,7 +28,6 @@ class UsersActivitiy : AppCompatActivity() {
             reload();
         }
 }
-
     fun sign (email:String,password:String,view: View){
         auth.signInWithEmailAndPassword(email,password).addOnCompleteListener {
             if (it.isSuccessful){
