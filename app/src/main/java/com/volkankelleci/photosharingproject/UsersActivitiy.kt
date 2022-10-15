@@ -43,6 +43,20 @@ class UsersActivitiy : AppCompatActivity() {
             }
         }
     }
+    fun save(view: View,email:String,password:String){
+        auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(this){
+            if (it.isSuccessful){
+                Log.d(TAG,"newUsersCreated:success")
+                val user=auth.currentUser
+                updateUI(user)
+            }else{
+                Log.w(TAG,"newUsersCreates:failure",it.exception)
+                Toast.makeText(baseContext, "Authentication failed.",
+                    Toast.LENGTH_SHORT).show()
+                updateUI(null)
+            }
+        }
+    }
     private fun sendEmailVerification() {
         // [START send_email_verification]
         val user = auth.currentUser!!
@@ -52,6 +66,7 @@ class UsersActivitiy : AppCompatActivity() {
             }
         // [END send_email_verification]
     }
+
 
     private fun reload() {
 
