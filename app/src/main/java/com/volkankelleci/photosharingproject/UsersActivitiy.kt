@@ -1,8 +1,10 @@
 package com.volkankelleci.photosharingproject
 
 import android.content.ContentValues.TAG
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -11,6 +13,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlinx.android.synthetic.main.activity_main.*
 
 class UsersActivitiy : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
@@ -25,57 +28,44 @@ class UsersActivitiy : AppCompatActivity() {
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
         if(currentUser != null){
-            reload();
+
         }
 }
-    fun sign (email:String,password:String,view: View){
+    fun sign (view: View){
+        val email=emailText.text.toString()
+        val password=passwordText.text.toString()
         auth.signInWithEmailAndPassword(email,password).addOnCompleteListener {
             if (it.isSuccessful){
-                Log.d(TAG, "signInWithEmail:success")
-                val user = auth.currentUser
-                updateUI(user)
+                val updatedUser=auth.currentUser
+                Toast.makeText(this,"DONE:${updatedUser}",Toast.LENGTH_LONG)
+
+
+
+
+                val intent=Intent(this,Photos_Activitiy::class.java)
+                startActivity(intent)
+                finish()
             }else {
-                // If sign in fails, display a message to the user.
-                Log.w(TAG, "signInWithEmail:failure", it.exception)
-                Toast.makeText(baseContext, "Authentication failed.",Toast.LENGTH_SHORT).show()
-                updateUI(null)
+
             }
         }
     }
-    fun save(view: View,email:String,password:String){
-        auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(this){
+    fun save(view: View){
+        val email=emailText.text.toString()
+        val password=passwordText.text.toString()
+        auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener {
             if (it.isSuccessful){
-                Log.d(TAG,"newUsersCreated:success")
-                val user=auth.currentUser
-                updateUI(user)
+                val intent=Intent(this,Photos_Activitiy::class.java)
+                startActivity(intent)
+                finish()
             }else{
-                Log.w(TAG,"newUsersCreates:failure",it.exception)
-                Toast.makeText(baseContext, "Authentication failed.",
-                    Toast.LENGTH_SHORT).show()
-                updateUI(null)
+
             }
         }
     }
-    private fun sendEmailVerification() {
-        // [START send_email_verification]
-        val user = auth.currentUser!!
-        user.sendEmailVerification()
-            .addOnCompleteListener(this) { task ->
-                // Email Verification sent
-            }
-        // [END send_email_verification]
+
     }
 
 
-    private fun reload() {
-
-    }
-    fun updateUI(user: FirebaseUser?) {
-
-    }
-    companion object{
-        private const val TAG = "EmailPassword"
-    }
-}
 
 
